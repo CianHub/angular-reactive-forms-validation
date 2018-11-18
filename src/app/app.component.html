@@ -1,0 +1,40 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+
+      <h2>Project Form</h2>
+      <form [formGroup]="projectForm" (ngSubmit)='onSubmit()' class='form-group'>
+        <div class='form-group'>
+          <label>Project Name</label>
+          <input formControlName="projectName" required type='text' placeholder='Enter a valid project name' class='form-control'
+            [class.errorForm]='!projectForm.get("projectName").valid'>
+
+          <p class='text-danger' *ngIf='projectForm.get("projectName").errors?.required'>
+            Project name is required</p>
+          <p class='
+            text-danger' *ngIf='projectForm.get("projectName").errors?.forbiddenName'>Please
+            enter a valid project name</p>
+        </div>
+        <div class='form-group'>
+          <label>Email</label>
+          <input [class.errorForm]='!projectForm.get("email").valid' formControlName="email" required type='email'
+            placeholder='Enter a valid email address' class='form-control'>
+          <p class='text-danger' *ngIf='projectForm.get("email").errors?.required'>
+            Email is required</p>
+          <p class='text-danger' *ngIf='projectForm.get("email").errors?.email'>
+            Project name is required</p>
+        </div>
+        <div class='form-group'>
+          <label>Status</label>
+          <select class="form-control" formControlName="projectStatus" placeholder='Select a project status'>
+            <option selected='selected' value="stable">Stable</option>
+            <option value="critical">Critical</option>
+            <option value="finished">Finished</option>
+          </select>
+        </div>
+        <button [disabled]='!projectForm.valid' type='submit' class='btn btn-success'>Submit</button>
+      </form>
+    </div>
+  </div>
+  {{projectForm.status}}
+</div>
